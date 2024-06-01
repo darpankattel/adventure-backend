@@ -2,26 +2,46 @@
 
 ## Table of Contents
 1. [Introduction](#introduction)
+
    1.1 [Purpose](#purpose)
+
    1.2 [Scope](#scope)
+
    1.3 [Definitions, Acronyms, and Abbreviations](#definitions-acronyms-and-abbreviations)
+
    1.4 [References](#references)
+
    1.5 [Overview](#overview)
 2. [Overall Description](#overall-description)
+
    2.1 [Product Perspective](#product-perspective)
+
    2.2 [Product Functions](#product-functions)
+
    2.3 [User Characteristics](#user-characteristics)
+   
    2.4 [Constraints](#constraints)
+
    2.5 [Assumptions and Dependencies](#assumptions-and-dependencies)
+
 3. [Specific Requirements](#specific-requirements)
+
    3.1 [Functional Requirements](#functional-requirements)
+
    3.2 [Non-Functional Requirements](#non-functional-requirements)
+
    3.3 [External Interface Requirements](#external-interface-requirements)
+
 4. [System Features](#system-features)
+
    4.1 [Frontend](#frontend)
+
    4.2 [Backend](#backend)
+
    4.3 [AWS Integration](#aws-integration)
+
    4.4 [Deep Learning Components](#deep-learning-components)
+   
 5. [Business Modeling and Monetization](#business-modeling-and-monetization)
 6. [Appendix](#appendix)
    6.1 [Feedback and Improvements](#feedback-and-improvements)
