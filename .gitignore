@@ -1,0 +1,27 @@
+# Ignore the virtual environment directory
+venv/
+wenv/
+media/
+
+
+# env variables
+.env
+
+# Ignore pycache
+__pycache__/
+
+# Ignore compiled Python files
+*.pyc
+*.pyo
+*.pyd
+
+
+# Ignore the local .py script temp files
+temp.py
+usedjango.py
+
+
+credentials.json
+
+# everything that ends with .temp.py
+*.temp.py
