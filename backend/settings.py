@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # own apps
+    'api.apps.ApiConfig',
+    'account.apps.AccountConfig',
+    'campaign.apps.CampaignConfig',
+    'canvas.apps.CanvasConfig',
 ]
 
 MIDDLEWARE = [
