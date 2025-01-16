@@ -38,11 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # third-party apps
+    'rest_framework',
+    'knox',
+
     # own apps
     'api.apps.ApiConfig',
     'account.apps.AccountConfig',
     'campaign.apps.CampaignConfig',
     'canvas.apps.CanvasConfig',
+    'background.apps.BackgroundConfig',
 ]
 
 MIDDLEWARE = [

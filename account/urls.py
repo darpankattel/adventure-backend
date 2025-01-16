@@ -1,17 +1,14 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 # appended with /api/account/
 
 urlpatterns = [
-    path('signup/', views.SignUpView.as_view(), name='signup'),
-    path('login/', views.LoginView.as_view(), name='login'),
-    path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('google/', views.GoogleAuthView.as_view(), name='google-auth'),
+    path('logout/', views.UserLogoutView.as_view(), name='logout'),
 
-    path('profile/', views.ProfileView.as_view(), name='profile'),
-    path('profile/picture/', views.ProfilePictureView.as_view(),
-         name='profile-picture'),
+    path('profile/', views.UserProfileView.as_view(), name='profile'),
 
-    path('password-reset/', views.PasswordResetView.as_view(), name='password-reset'),
-
+    path('hardcoded-login/', views.HardcodedLoginView.as_view(),
+         name='hardcoded-login'),
 ]

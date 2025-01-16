@@ -1,11 +1,11 @@
-from rest_framework import views
-
-# Create your views here.
-
-
-class CampaignListCreateView(views.APIView):
-    pass
+from rest_framework import viewsets
+from .models import Campaign
+from .serializers import CampaignSerializer
 
 
-class CampaignRetrieveUpdateDestroyView(views.APIView):
-    pass
+class CampaignViewSet(viewsets.ModelViewSet):
+    queryset = Campaign.objects.all()
+    serializer_class = CampaignSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user)

@@ -1,6 +1,5 @@
 # Ignore the virtual environment directory
 venv/
-wenv/
 media/
 
 
