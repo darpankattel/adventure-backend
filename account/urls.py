@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     path('google/', views.GoogleAuthView.as_view(), name='google-auth'),
     path('logout/', views.UserLogoutView.as_view(), name='logout'),
+    path('logout-all/', views.UserLogoutAllView.as_view(), name='logout-all'),
 
     path('profile/', views.UserProfileView.as_view(), name='profile'),
 

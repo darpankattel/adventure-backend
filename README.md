@@ -8,6 +8,12 @@ Adventure is a project designed to revolutionize the way campaigns are created a
 ## About This Django Project
 This Django project forms the backend API for the Adventure platform. It handles user authentication, campaign management, background image storage, and canvas state saving. The backend integrates seamlessly with the frontend, ensuring a smooth user experience.
 
+The major apps in this project are:
+- **account**: It handles the major account operations, like, login, logout, get profile, etc..
+- **campaign**: Whenever we want to create any advertisement poster, first of all we will create a campaign, it will have a name and description. This app handles that part.
+- **canvas**: A campaign will have a canvas linked to it, the canvas it where the editing history is stored and the layers are also present. This app handles these tasks.
+- **background**: A campaign may have multiple background images generated, which is handled by this app.
+
 ---
 
 ## Setting Up the Project
@@ -18,6 +24,12 @@ Follow the steps below to set up the backend on your local machine:
    git clone https://github.com/darpankattel/adventure-backend.git
    cd adventure-backend
    ```
+**OR**
+
+  ```bash
+  git clone https://github.com/adventure-major-project/backend.git
+  cd backend
+  ```
 
 2. Install the required Python dependencies:
    ```bash
@@ -68,13 +80,30 @@ All routes are prefixed with `/api/account/`.
   ```http
   POST /api/account/logout/
   ```
-  **Description**: Log out the currently authenticated user.
+  **Description**: Log out the currently authenticated user. Also, for logging out of all the devices, we have a `/api/account/logout-all` view.
 
 - **User Profile**
   ```http
   GET /api/account/profile/
   ```
   **Description**: Retrieve the profile of the logged-in user.
+
+- **User Profile Update**
+  ```http
+  PUT /api/account/profile/
+  ```
+  **Description**: Update the profile of the logged-in user.
+
+  The input JSON format is
+
+  ```json
+  {
+      "first_name": "Darpan",
+      "last_name": "Kattel",
+      "bio": "My life is like a speeding bullet, that just hasn't hit the target yet!",
+      "website": "https://darpankattel.com.np"
+  }
+  ```
 
 - **Hardcoded Login**
   ```http
@@ -98,6 +127,21 @@ All routes are prefixed with `/api/campaign/`.
   ```
   **Description**: Retrieve all campaigns for the authenticated user.
 
+  The response is:
+
+  ```json
+  [
+      {
+          "id": 1,
+          "name": "Sony Headphone Zx23",
+          "description": "A campaign to highlight the features of the sony headphone.",
+          "created_at": "2025-01-20T14:28:05.529970+05:45",
+          "updated_at": "2025-01-20T14:28:05.529970+05:45",
+          "user": 1
+      }
+  ]
+  ```
+
 - **Create Campaign**
   ```http
   POST /api/campaign/
@@ -105,8 +149,8 @@ All routes are prefixed with `/api/campaign/`.
   **Request Body**:
   ```json
   {
-    "name": "string",
-    "description": "string"
+      "name": "Samsung Television 4K 56'",
+      "description": "A campaign to highlight the features of the samsung tv."
   }
   ```
   **Response**:
@@ -125,8 +169,8 @@ All routes are prefixed with `/api/campaign/`.
   **Request Body**:
   ```json
   {
-    "name": "string",
-    "description": "string"
+      "name": "Samsung Television 4K 56'",
+      "description": "A campaign to highlight the features of the samsung tv."
   }
   ```
   **Response**:
@@ -141,7 +185,7 @@ All routes are prefixed with `/api/campaign/`.
 ---
 
 ### 3. **Canvas**
-All routes are prefixed with `/api/canvas/`.
+All routes are prefixed with `/api/canvas/`. The `id` associated with the responses and requests is of **Campaign**, and not of **Canvas**.
 
 #### Endpoints
 

@@ -8,21 +8,38 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from knox.models import AuthToken
-from knox.views import LogoutView
-from knox.auth import TokenAuthentication
+from knox.views import LogoutView, LogoutAllView
+from .auth import CookieTokenAuthentication as TokenAuthentication
 
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 
 from .models import Profile
-from .serializers import ProfileSerializer
+from .serializers import ProfileSerializer, ProfileUpdateSerializer, UserUpdateSerializer
 
 
 class UserLogoutView(LogoutView):
     """
-    Logs out the user and deletes the Knox token.
+    Custom Logout View extending the Knox LogoutView, using the CookieTokenAuthentication
     """
-    pass
+    authentication_classes = (TokenAuthentication,)
+
+    def post(self, request, format=None):
+        response = super().post(request, format=None)
+        response.delete_cookie('auth_token')
+        return response
+
+
+class UserLogoutAllView(LogoutAllView):
+    """
+    Custom LogoutAll View extending the Knox LogoutAllView, using the CookieTokenAuthentication
+    """
+    authentication_classes = (TokenAuthentication,)
+
+    def post(self, request, format=None):
+        response = super().post(request, format=None)
+        response.delete_cookie('auth_token')
+        return response
 
 
 class GoogleAuthView(APIView):
@@ -101,13 +118,18 @@ class UserProfileView(APIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def update(self, request):
+    def put(self, request):
         user = request.user
         profile = Profile.objects.get(user=user)
-        serializer = ProfileSerializer(profile, data=request.data)
+        request.data['user'] = user.id
+        serializer = ProfileUpdateSerializer(profile, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            user_serializer = UserUpdateSerializer(user, data=request.data)
+            if user_serializer.is_valid():
+                user_serializer.save()
+                return Response({**serializer.data, **user_serializer.data}, status=status.HTTP_200_OK)
+            return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
