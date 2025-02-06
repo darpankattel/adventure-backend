@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'campaign.apps.CampaignConfig',
     'canvas.apps.CanvasConfig',
     'background.apps.BackgroundConfig',
+    'productimage.apps.ProductimageConfig'
 ]
 
 MIDDLEWARE = [

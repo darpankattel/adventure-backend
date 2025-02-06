@@ -7,4 +7,5 @@ urlpatterns = [
     path('campaign/', include('campaign.urls')),
     path('canvas/', include('canvas.urls')),
     path('bg/', include('background.urls')),
+    path('prod/', include('productimage.urls')),
 ]
