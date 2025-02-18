@@ -7,7 +7,7 @@ class ProductImage(models.Model):
     campaign = models.ForeignKey(
         Campaign, on_delete=models.CASCADE, related_name="product_images")
     image = models.ImageField(
-        upload_to="media/product_images/", blank=True, null=True)
+        upload_to="product_images/", blank=True, null=True)
     prompt = models.CharField(max_length=500, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
