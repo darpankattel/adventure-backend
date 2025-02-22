@@ -28,7 +28,7 @@ DEBUG = True
 DEPLOYED = True
 
 ALLOWED_HOSTS = ["http://localhost:8000",
-                 "https://darpankattel4.pythonanywhere.com/"]
+                 "https://darpankattel3.pythonanywhere.com/"]
 
 
 # Application definition
