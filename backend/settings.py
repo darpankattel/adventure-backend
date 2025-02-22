@@ -27,8 +27,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 DEPLOYED = True
 
-ALLOWED_HOSTS = ["http://localhost:8000",
-                 "https://darpankattel3.pythonanywhere.com/"]
+ALLOWED_HOSTS = ["localhost:8000",
+                 "darpankattel3.pythonanywhere.com"]
 
 
 # Application definition
