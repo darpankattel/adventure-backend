@@ -28,7 +28,7 @@ DEBUG = True
 DEPLOYED = True
 
 ALLOWED_HOSTS = ["localhost:8000",
-                 "darpankattel3.pythonanywhere.com"]
+                 "darpankattel3.pythonanywhere.com", "adventure-backend-ibvt.onrender.com"]
 
 
 # Application definition
