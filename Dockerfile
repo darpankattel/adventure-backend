@@ -1,6 +1,8 @@
 # Use official Python image
 FROM python:3.10
 
+RUN apt-get update && apt-get install -y libpq-dev
+
 # Set the working directory in the container
 WORKDIR /app
 
