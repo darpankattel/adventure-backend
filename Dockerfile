@@ -22,8 +22,8 @@ COPY . .
 ENV PYTHONUNBUFFERED=1
 
 # Run migrations and collect static files before starting server
-RUN python manage.py makemigrations && python manage.py migrate
-RUN python manage.py collectstatic --noinput
+RUN python3 manage.py makemigrations && python3 manage.py migrate
+RUN python3 manage.py collectstatic --noinput
 
 # Expose port 8000
 EXPOSE 8000
