@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # third-party apps
     'rest_framework',
     'knox',
+    'corsheaders',
 
     # own apps
     'api.apps.ApiConfig',
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -157,3 +159,27 @@ else:
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# TODO: remove CORS settings on production
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Add your frontend URL
+]
+
+CSRF_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SECURE = True  # Ensure it's sent over HTTPS
+CSRF_COOKIE_HTTPONLY = False  # CSRF token should be accessible via JavaScript
+SESSION_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SECURE = True
+CORS_ALLOW_HEADERS = default_headers + (
+    'ngrok-skip-browser-warning',
+    'Access-Control-Allow-Origin'
+)
+
+# CORS_ALLOW_HEADERS = ['*']
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000',
+                        'http://127.0.0.1:3000']
+
+CORS_ALLOW_CREDENTIALS = True
