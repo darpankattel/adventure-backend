@@ -173,7 +173,7 @@ CORS_ALLOWED_ORIGINS = [
 
 CSRF_COOKIE_SAMESITE = "None"
 CSRF_COOKIE_SECURE = True  # Ensure it's sent over HTTPS
-CSRF_COOKIE_HTTPONLY = False  # CSRF token should be accessible via JavaScript
+CSRF_COOKIE_HTTPONLY = True  # CSRF token should be accessible via JavaScript
 SESSION_COOKIE_SAMESITE = "None"
 SESSION_COOKIE_SECURE = True
 CORS_ALLOW_HEADERS = default_headers + (
