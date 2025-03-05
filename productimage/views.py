@@ -7,6 +7,7 @@ from account.auth import CookieTokenAuthentication as TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
 import os
+# from backgroun.utils import inititate_generation
 REMOVE_BG_API_KEY = os.getenv("REMOVE_BG_API_KEY")
 
 
@@ -21,11 +22,11 @@ class ProductImageViewSet(viewsets.ModelViewSet):
 
     # create(), retrieve(), update(), partial_update(), destroy() and list()
     def create(self, request, *args, **kwargs):
-        # TODO: we will initiate a Deep Learning model here, to create the product image from the prompt
-        # for now we will set image to null
         serilaizer = self.get_serializer(data=request.data)
         if serilaizer.is_valid():
             serilaizer.save()
+            image_url = None
+            # image_url = inititate_generation(serilaizer.data)
             return response.Response(serilaizer.data, status=status.HTTP_201_CREATED)
         return response.Response(serilaizer.errors, status=status.HTTP_400_BAD_REQUEST)
 

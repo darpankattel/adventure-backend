@@ -167,6 +167,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # Add your frontend URL
+    "https://adventure-major-project.vercel.app",
+    "https://www.adventure-major-project.vercel.app"
 ]
 
 CSRF_COOKIE_SAMESITE = "None"
@@ -182,6 +184,6 @@ CORS_ALLOW_HEADERS = default_headers + (
 # CORS_ALLOW_HEADERS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ['http://localhost:3000',
-                        'http://127.0.0.1:3000']
+                        'http://127.0.0.1:3000', 'https://adventure-major-project.vercel.app/', 'https://www.adventure-major-project.vercel.app/']
 
 CORS_ALLOW_CREDENTIALS = True

@@ -20,7 +20,6 @@ class BackgroundImageViewSet(viewsets.ModelViewSet):
         serilaizer = self.get_serializer(data=request.data)
         if serilaizer.is_valid():
             serilaizer.save()
-            print(serilaizer.data)
             image_url = None
             # image_url = inititate_generation(serilaizer.data)
             return response.Response({**serilaizer.data, "image": image_url}, status=status.HTTP_201_CREATED)
