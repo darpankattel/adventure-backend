@@ -23,3 +23,5 @@ credentials.json
 
 # everything that ends with .temp.py
 *.temp.py
+
+background/models

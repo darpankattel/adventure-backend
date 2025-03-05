@@ -1,14 +1,15 @@
 from django.conf import settings
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.contrib.auth import login
 
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
 from knox.models import AuthToken
-from knox.views import LogoutView, LogoutAllView
+from knox.views import LogoutView, LogoutAllView, LoginView
 from .auth import CookieTokenAuthentication as TokenAuthentication
 
 from google.oauth2 import id_token
@@ -42,7 +43,7 @@ class UserLogoutAllView(LogoutAllView):
         return response
 
 
-class GoogleAuthView(APIView):
+class GoogleAuthView(LoginView):
     """
     Authenticates the user using Firebase OAuth2.0.
 
@@ -50,11 +51,12 @@ class GoogleAuthView(APIView):
 
     If the token is valid, the view creates a new user or updates an existing one and generates a Knox token.
     """
-    authentication_classes = []  # Disable authentication for this view
+    permission_classes = (AllowAny,)
+    authentication_classes = []
 
     def post(self, request):
         id_token_str = request.data.get('id_token')
-
+        print(id_token_str)
         if not id_token_str:
             return Response({'error': 'ID token is required'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -69,7 +71,7 @@ class GoogleAuthView(APIView):
             name = idinfo.get('name')
             picture = idinfo.get('picture')
 
-            # print(google_id, email, name, picture)
+            print(google_id, email, name, picture)
             try:
                 user = User.objects.get(username=email)
             except User.DoesNotExist:
@@ -91,13 +93,20 @@ class GoogleAuthView(APIView):
                 profile.picture = picture
                 profile.save()
 
-            # Generate Knox Token
-            _, token = AuthToken.objects.create(user)
+            login(request, user)
+            response = super().post(request, format=None)
+            token = response.data["token"]
+            expiry = response.data["expiry"]
+            del response.data['token']
 
-            return Response({
-                'token': token,
-                "is_new_user": created
-            }, status=status.HTTP_200_OK)
+            serializer = ProfileSerializer(profile)
+            response = Response(serializer.data, status=status.HTTP_200_OK)
+            # TODO: set secure=True in production
+            response.set_cookie('auth_token', token,
+                                httponly=True, samesite="None", secure=True, expires=expiry)
+            # partitioned=True)
+            print(token)
+            return response
 
         except ValueError as e:
             print(e)

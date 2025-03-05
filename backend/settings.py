@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 DEPLOYED = True
 
-ALLOWED_HOSTS = ["localhost:8000",
+ALLOWED_HOSTS = ["localhost",
                  "darpankattel3.pythonanywhere.com", "adventure-backend-ibvt.onrender.com"]
 
 

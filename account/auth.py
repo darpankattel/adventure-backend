@@ -17,11 +17,12 @@ class CookieTokenAuthentication(TokenAuthentication):
         token = request.COOKIES.get('auth_token')
 
         if not token:
-            # return None
+            return None
             # get a token from databse
-            from knox.models import AuthToken
-            user = get_user_model().objects.get(username='darpan')
-            token = AuthToken.objects.create(user)[1]
+
+            # from knox.models import AuthToken
+            # user = get_user_model().objects.get(username='darpan')
+            # token = AuthToken.objects.create(user)[1]
 
         # add token to request as authorization header
         request.META['HTTP_AUTHORIZATION'] = f"{knox_settings.AUTH_HEADER_PREFIX} {token}"

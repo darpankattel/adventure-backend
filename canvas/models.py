@@ -5,7 +5,8 @@ from campaign.models import Campaign
 class CanvasState(models.Model):
     campaign = models.OneToOneField(
         Campaign, on_delete=models.CASCADE, related_name="canvas_state")
-    data = models.JSONField()  # Stores the entire canvas state as JSON
+    # Stores the entire canvas state as JSON
+    data = models.JSONField(default=lambda: {"elements": [], "appState": []})
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
