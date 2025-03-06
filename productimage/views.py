@@ -27,6 +27,8 @@ class ProductImageViewSet(viewsets.ModelViewSet):
             serilaizer.save()
             image_url = None
             # image_url = inititate_generation(serilaizer.data)
+            # save the image_url in the database
+            #
             return response.Response(serilaizer.data, status=status.HTTP_201_CREATED)
         return response.Response(serilaizer.errors, status=status.HTTP_400_BAD_REQUEST)
 
