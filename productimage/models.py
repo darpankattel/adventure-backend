@@ -13,3 +13,6 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return f"Product Image for {self.campaign.name}"
+
+    class Meta:
+        ordering = ["-created_at"]

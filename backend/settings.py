@@ -27,10 +27,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEPLOYED = False
+DEPLOYED = True
 
 ALLOWED_HOSTS = ["localhost",
-                 "darpankattel3.pythonanywhere.com", "adventure-backend-ibvt.onrender.com"]
+                 "darpankattel3.pythonanywhere.com", "adventure-backend-ibvt.onrender.com", "10.100.81.116", "192.168.202.150"]
 
 
 # Application definition

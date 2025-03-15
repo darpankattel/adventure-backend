@@ -1,7 +1,6 @@
 # Ignore the virtual environment directory
 venv/
 
-
 # env variables
 .env
 

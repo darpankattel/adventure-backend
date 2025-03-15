@@ -22,15 +22,16 @@ class ProductImageViewSet(viewsets.ModelViewSet):
 
     # create(), retrieve(), update(), partial_update(), destroy() and list()
     def create(self, request, *args, **kwargs):
-        serilaizer = self.get_serializer(data=request.data)
-        if serilaizer.is_valid():
-            serilaizer.save()
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            instance = serializer.save()
             image_url = None
-            # image_url = inititate_generation(serilaizer.data)
+            # image_url = initiate_generation(serializer.data, "product")
             # save the image_url in the database
-            #
-            return response.Response(serilaizer.data, status=status.HTTP_201_CREATED)
-        return response.Response(serilaizer.errors, status=status.HTTP_400_BAD_REQUEST)
+            instance.image = f"product_images/{image_url}"
+            instance.save()
+            return response.Response(serializer.data, status=status.HTTP_201_CREATED)
+        return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
